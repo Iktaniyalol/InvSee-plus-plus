@@ -56,7 +56,7 @@ class EnderClearExecutor implements CommandExecutor {
                 itemType = eitherMaterial.getRight();
             } else {
                 assert eitherMaterial.isLeft();
-                sender.sendMessage(ChatColor.RED + eitherMaterial.getLeft());
+                sender.sendMessage("§c§l✖§r §9 §8» §f" + eitherMaterial.getLeft());
                 return true;
             }
         }
@@ -68,7 +68,7 @@ class EnderClearExecutor implements CommandExecutor {
                 maxCount = eitherMaxCount.getRight();
             } else {
                 assert eitherMaxCount.isLeft();
-                sender.sendMessage(ChatColor.RED + eitherMaxCount.getLeft());
+                sender.sendMessage("§c§l✖§r §9Инвентарь §8» §f" + eitherMaxCount.getLeft());
                 return true;
             }
         }
@@ -81,7 +81,7 @@ class EnderClearExecutor implements CommandExecutor {
 
         uuidFuture.<Optional<String>, Void>thenCombineAsync(userNameFuture, (optUuid, optName) -> {
             if (!optName.isPresent() || !optUuid.isPresent()) {
-                sender.sendMessage(ChatColor.RED + "Unknown player: " + inputPlayer);
+                sender.sendMessage("§c§l✖§r §9Инвентарь §8» §fИгрока §7" + inputPlayer + " §6не существует§f.");
             } else {
                 String userName = optName.get();
                 UUID uuid = optUuid.get();
@@ -93,37 +93,37 @@ class EnderClearExecutor implements CommandExecutor {
                         EnderSpectatorInventory inventory = response.getInventory();
                         if (finalItemType == null) {
                             inventory.clear();
-                            sender.sendMessage(ChatColor.GREEN + "Cleared " + userName + "'s enderchest.");
+                            sender.sendMessage("§a§l✔§r §9Инвентарь §8» §fЭндер-сундук игрока §7" + userName + " §6очищен§f.");
                         } else {
                             if (finalMaxCount == -1) {
                                 finalItemType.removeAllFrom(inventory);
-                                sender.sendMessage(ChatColor.GREEN + "Removed all " + finalItemType + " from " + userName + "'s enderchest.");
+                                sender.sendMessage("§a§l✔§r §9Инвентарь §8» §fУдалены все предметы §6" + finalItemType + " §fиз §6эндер-сундука §7" + userName + "§f.");
                             } else {
                                 int removed = finalItemType.removeAtMostFrom(inventory, finalMaxCount);
-                                sender.sendMessage( ChatColor.GREEN + "Removed " + removed + " " + finalItemType + " from " + userName + "'s enderchest.");
+                                sender.sendMessage("§a§l✔§r §9Инвентарь §8» §fУдалено §6" + removed + " " + finalItemType + " §fиз §6эндер-сундука §7" + userName + "§f.");
                             }
                         }
                         api.saveEnderChest(inventory).whenComplete((v, e) -> {
-                            if (e != null) plugin.getLogger().log(Level.SEVERE, "Could not save enderchest", e);
+                            if (e != null) plugin.getLogger().log(Level.SEVERE, "§c§l✖§r §9Система §8» §fНе удалось сохранить §6эндер-сундук§f", e);
                         });
                     } else {
                         NotCreatedReason reason = response.getReason();
                         if (reason instanceof TargetDoesNotExist) {
                             TargetDoesNotExist targetDoesNotExist = (TargetDoesNotExist) reason;
-                            sender.sendMessage(ChatColor.RED + "Player " + targetDoesNotExist.getTarget() + " does not exist.");
+                            sender.sendMessage("§c§l✖§r §9Инвентарь §8» §fИгрока §7" + targetDoesNotExist.getTarget() + " §6не существует§f.");
                         } else if (reason instanceof UnknownTarget) {
                             UnknownTarget unknownTarget = (UnknownTarget) reason;
-                            sender.sendMessage(ChatColor.RED + "Player " + unknownTarget.getTarget() + " has not logged onto the server yet.");
+                            sender.sendMessage("§c§l✖§r §9Инвентарь §8» §fИгрок §7" + unknownTarget.getTarget() + " §fещё не §6заходил на сервер§f.");
                         } else if (reason instanceof TargetHasExemptPermission) {
                             TargetHasExemptPermission targetHasExemptPermission = (TargetHasExemptPermission) reason;
-                            sender.sendMessage(ChatColor.RED + "Player " + targetHasExemptPermission.getTarget() + " is exempted from being spectated.");
+                            sender.sendMessage("§c§l✖§r §9Инвентарь §8» §fИгрок §7" + targetHasExemptPermission.getTarget() + " §fимеет §6защиту§f от просмотра эндер-сундука.");
                         } else if (reason instanceof ImplementationFault) {
                             ImplementationFault implementationFault = (ImplementationFault) reason;
-                            sender.sendMessage(ChatColor.RED + "An internal fault occurred when trying to load " + implementationFault.getTarget() + "'s enderchest.");
+                            sender.sendMessage("§c§l✖§r §9Инвентарь §8» §fОшибка при §6загрузке эндер-сундука§f игрока §7" + implementationFault.getTarget() + "§f.");
                         } else if (reason instanceof OfflineSupportDisabled) {
-                            sender.sendMessage(ChatColor.RED + "Spectating offline players' enderchests is disabled.");
+                            sender.sendMessage("§c§l✖§r §9Инвентарь §8» §fПросмотр эндер-сундуков §6оффлайн-игроков §fотключён.");
                         } else {
-                            sender.sendMessage(ChatColor.RED + "Cannot clear from " + inputPlayer + "'s enderchest for an unknown reason.");
+                            sender.sendMessage("§c§l✖§r §9Инвентарь §8» §fНе удалось очистить эндер-сундук §7" + inputPlayer + " §fпо неизвестной причине.");
                         }
                     }
                 }, runnable -> api.getScheduler().executeSyncPlayer(uuid, runnable, null));
