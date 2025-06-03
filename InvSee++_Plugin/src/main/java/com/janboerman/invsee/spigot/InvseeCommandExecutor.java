@@ -39,7 +39,7 @@ public class InvseeCommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) return false;
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fВы должны быть в §6игре§f, чтобы сделать это.");
+            sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fВы должны быть в §6игре§f, чтобы сделать это.");
             return true;
         }
 
@@ -76,7 +76,7 @@ public class InvseeCommandExecutor implements CommandExecutor {
 
             Either<String, PwiCommandArgs> either = PwiCommandArgs.parse(pwiArgument, pwiApi.getHook());
             if (either.isLeft()) {
-                player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §f" + either.getLeft());
+                player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §f" + either.getLeft());
                 return true;
             }
 
@@ -161,30 +161,30 @@ public class InvseeCommandExecutor implements CommandExecutor {
         //Gracefully handle failure and faults.
         fut.whenComplete((response, throwable) -> {
             if (throwable != null) {
-                player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПроизошла §6ошибка§f при открытии инвентаря §7" + playerNameOrUUID + "§f.");
-                plugin.getLogger().log(Level.SEVERE, "§l§8[§cx§8]§r §9Система §8» §fОшибка при создании §6инвентаря§f для просмотра", throwable);
+                player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПроизошла §6ошибка§f при открытии инвентаря §7" + playerNameOrUUID + "§f.");
+                plugin.getLogger().log(Level.SEVERE, "§8[§cx§8]§r §9Система §8» §fОшибка при создании §6инвентаря§f для просмотра", throwable);
             } else {
                 if (!response.isOpen()) {
                     NotOpenedReason notOpenedReason = response.getReason();
                     if (notOpenedReason instanceof InventoryOpenEventCancelled) {
-                        player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fДругой плагин §6заблокировал§f просмотр инвентаря §7" + playerNameOrUUID + "§f.");
+                        player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fДругой плагин §6заблокировал§f просмотр инвентаря §7" + playerNameOrUUID + "§f.");
                     } else if (notOpenedReason instanceof InventoryNotCreated) {
                         NotCreatedReason notCreatedReason = ((InventoryNotCreated) notOpenedReason).getNotCreatedReason();
                         if (notCreatedReason instanceof TargetDoesNotExist) {
-                            player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + playerNameOrUUID + " §6не существует§f.");
+                            player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + playerNameOrUUID + " §6не существует§f.");
                         } else if (notCreatedReason instanceof UnknownTarget) {
-                            player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + playerNameOrUUID + " §fещё не §6заходил на сервер§f.");
+                            player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + playerNameOrUUID + " §fещё не §6заходил на сервер§f.");
                         } else if (notCreatedReason instanceof TargetHasExemptPermission) {
-                            player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + playerNameOrUUID + " §fимеет §6защиту§f от просмотра инвентаря.");
+                            player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + playerNameOrUUID + " §fимеет §6защиту§f от просмотра инвентаря.");
                         } else if (notCreatedReason instanceof ImplementationFault) {
-                            player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fОшибка при §6загрузке инвентаря§f игрока §7" + playerNameOrUUID + "§f.");
+                            player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fОшибка при §6загрузке инвентаря§f игрока §7" + playerNameOrUUID + "§f.");
                         } else if (notCreatedReason instanceof OfflineSupportDisabled) {
-                            player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПросмотр инвентарей §6оффлайн-игроков §fотключён.");
+                            player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПросмотр инвентарей §6оффлайн-игроков §fотключён.");
                         } else {
-                            player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fНе удалось §6создать инвентарь §7" + playerNameOrUUID + " §fпо неизвестной причине.");
+                            player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось §6создать инвентарь §7" + playerNameOrUUID + " §fпо неизвестной причине.");
                         }
                     } else {
-                        player.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fНе удалось открыть инвентарь §7" + playerNameOrUUID + " §fпо неизвестной причине.");
+                        player.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось открыть инвентарь §7" + playerNameOrUUID + " §fпо неизвестной причине.");
                     }
                 } //else: it opened successfully: nothing to do there!
             }

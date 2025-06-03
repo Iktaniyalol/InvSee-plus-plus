@@ -966,8 +966,8 @@ public class InvseeAPI {
                     //spectated player is no longer online
                     saveInventory(spectatorInventory).whenComplete((voidResult, throwable) -> {
                         if (throwable != null) {
-                            plugin.getLogger().log(Level.SEVERE, "§l§8[§cx§8]§r §9Система §8» §fОшибка при сохранении §6инвентаря§f оффлайн-игрока", throwable);
-                            event.getPlayer().sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при  §6сохранении инвентаря§f.");
+                            plugin.getLogger().log(Level.SEVERE, "§8[§cx§8]§r §9Система §8» §fОшибка при сохранении §6инвентаря§f оффлайн-игрока", throwable);
+                            event.getPlayer().sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при  §6сохранении инвентаря§f.");
                         }
                     }); //idem: don't remove from cache.
                 }
@@ -977,8 +977,8 @@ public class InvseeAPI {
                     //spectated player is no longer online
                     saveEnderChest(spectatorInventory).whenComplete((voidResult, throwable) -> {
                         if (throwable != null) {
-                            plugin.getLogger().log(Level.SEVERE, "§l§8[§cx§8]§r §9Система §8» §fОшибка при сохранении §6эндер-сундука§f оффлайн-игрока", throwable);
-                            event.getPlayer().sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при §6сохранении эндер-сундука§f.");
+                            plugin.getLogger().log(Level.SEVERE, "§8[§cx§8]§r §9Система §8» §fОшибка при сохранении §6эндер-сундука§f оффлайн-игрока", throwable);
+                            event.getPlayer().sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при §6сохранении эндер-сундука§f.");
                         }
                     }); //idem: don't remove from cache.
                 }
@@ -1048,29 +1048,29 @@ public class InvseeAPI {
             if (!openResponse.isOpen()) {
                 NotOpenedReason notOpenedReason = openResponse.getReason();
                 if (notOpenedReason instanceof InventoryOpenEventCancelled) {
-                    spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fДругой плагин §6заблокировал§f просмотр инвентаря §7" + targetNameOrUuid + "§f.");
+                    spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fДругой плагин §6заблокировал§f просмотр инвентаря §7" + targetNameOrUuid + "§f.");
                 } else if (notOpenedReason instanceof InventoryNotCreated) {
                     NotCreatedReason notCreatedReason = ((InventoryNotCreated) notOpenedReason).getNotCreatedReason();
                     if (notCreatedReason instanceof TargetDoesNotExist) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + targetNameOrUuid + " §6не существует§f.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + targetNameOrUuid + " §6не существует§f.");
                     } else if (notCreatedReason instanceof UnknownTarget) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fещё не §6заходил на сервер§f.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fещё не §6заходил на сервер§f.");
                     } else if (notCreatedReason instanceof TargetHasExemptPermission) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fимеет §6защиту§f от просмотра инвентаря.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fимеет §6защиту§f от просмотра инвентаря.");
                     } else if (notCreatedReason instanceof ImplementationFault) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fОшибка при §6загрузке инвентаря§f игрока §7" + targetNameOrUuid + "§f.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fОшибка при §6загрузке инвентаря§f игрока §7" + targetNameOrUuid + "§f.");
                     } else if (notCreatedReason instanceof OfflineSupportDisabled) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПросмотр инвентарей §6оффлайн-игроков §fотключён.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПросмотр инвентарей §6оффлайн-игроков §fотключён.");
                     } else {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fНе удалось создать инвентарь §7" + targetNameOrUuid + " §fпо неизвестной причине.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось создать инвентарь §7" + targetNameOrUuid + " §fпо неизвестной причине.");
                     }
                 } else {
-                    spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fНе удалось открыть инвентарь §7" + targetNameOrUuid + " §fпо неизвестной причине.");
+                    spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось открыть инвентарь §7" + targetNameOrUuid + " §fпо неизвестной причине.");
                 }
             }
         } else {
-            spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при открытии инвентаря §7" + targetNameOrUuid + "§f.");
-            plugin.getLogger().log(Level.SEVERE, "§l§8[§cx§8]§r §9Система §8» §fОшибка при создании инвентаря для просмотра", throwable);
+            spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при открытии инвентаря §7" + targetNameOrUuid + "§f.");
+            plugin.getLogger().log(Level.SEVERE, "§8[§cx§8]§r §9Система §8» §fОшибка при создании инвентаря для просмотра", throwable);
         }
     }
 
@@ -1093,29 +1093,29 @@ public class InvseeAPI {
             if (!openResponse.isOpen()) {
                 NotOpenedReason notOpenedReason = openResponse.getReason();
                 if (notOpenedReason instanceof InventoryOpenEventCancelled) {
-                    spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fДругой плагин §6заблокировал§f просмотр эндер-сундука §7" + targetNameOrUuid + "§f.");
+                    spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fДругой плагин §6заблокировал§f просмотр эндер-сундука §7" + targetNameOrUuid + "§f.");
                 } else if (notOpenedReason instanceof InventoryNotCreated) {
                     NotCreatedReason reason = ((InventoryNotCreated) notOpenedReason).getNotCreatedReason();
                     if (reason instanceof TargetDoesNotExist) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + targetNameOrUuid + " §6не существует§f.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + targetNameOrUuid + " §6не существует§f.");
                     } else if (reason instanceof UnknownTarget) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fещё не §6заходил на сервер§f.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fещё не §6заходил на сервер§f.");
                     } else if (reason instanceof TargetHasExemptPermission) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fимеет §6защиту§f от просмотра эндер-сундука.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetNameOrUuid + " §fимеет §6защиту§f от просмотра эндер-сундука.");
                     } else if (reason instanceof ImplementationFault) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fОшибка при §6загрузке эндер-сундука§f игрока §7" + targetNameOrUuid + "§f.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fОшибка при §6загрузке эндер-сундука§f игрока §7" + targetNameOrUuid + "§f.");
                     } else if (reason instanceof OfflineSupportDisabled) {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПросмотр эндер-сундуков §6оффлайн-игроков §fотключён.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПросмотр эндер-сундуков §6оффлайн-игроков §fотключён.");
                     } else {
-                        spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fНе удалось создать эндер-сундук §7" + targetNameOrUuid + " §fпо неизвестной причине.");
+                        spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось создать эндер-сундук §7" + targetNameOrUuid + " §fпо неизвестной причине.");
                     }
                 } else {
-                    spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fНе удалось открыть эндер-сундук §7" + targetNameOrUuid + " §fпо неизвестной причине.");
+                    spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось открыть эндер-сундук §7" + targetNameOrUuid + " §fпо неизвестной причине.");
                 }
             }
         } else {
-            spectator.sendMessage("§l§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при открытии эндер-сундука §7" + targetNameOrUuid + "§f.");
-            plugin.getLogger().log(Level.SEVERE, "§l§8[§cx§8]§r §9Система §8» §fОшибка при создании эндер-сундука для просмотра", throwable);
+            spectator.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПроизошла ошибка при открытии эндер-сундука §7" + targetNameOrUuid + "§f.");
+            plugin.getLogger().log(Level.SEVERE, "§8[§cx§8]§r §9Система §8» §fОшибка при создании эндер-сундука для просмотра", throwable);
         }
     }
 

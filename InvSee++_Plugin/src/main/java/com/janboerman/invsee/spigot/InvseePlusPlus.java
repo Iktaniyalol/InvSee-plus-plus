@@ -497,9 +497,9 @@ public class InvseePlusPlus extends JavaPlugin implements com.janboerman.invsee.
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-        sender.sendMessage("§l§8[§cx§8]§r §9Система §8» §fInvSee++ не запустился корректно!");
-        sender.sendMessage("§l§8[§cx§8]§r §9Система §8» §fПричина: несовместимость версий Minecraft/InvSee++");
-        sender.sendMessage("§l§8[§cx§8]§r §9Система §8» §fПодробности смотрите в логах сервера.");
+        sender.sendMessage("§8[§cx§8]§r §9Система §8» §fInvSee++ не запустился корректно!");
+        sender.sendMessage("§8[§cx§8]§r §9Система §8» §fПричина: несовместимость версий Minecraft/InvSee++");
+        sender.sendMessage("§8[§cx§8]§r §9Система §8» §fПодробности смотрите в логах сервера.");
         return true;
     }
 }
