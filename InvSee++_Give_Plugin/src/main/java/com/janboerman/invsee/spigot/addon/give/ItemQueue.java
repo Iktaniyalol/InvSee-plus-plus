@@ -61,7 +61,7 @@ public class ItemQueue implements ConfigurationSerializable {
                 console.sendMessage("§6§l❗§r §9Инвентарь §8» §fОсталось§8: §e" + last +
                         (queue.isEmpty() ? "" : ("§f, §e" + queue.stream().map(ItemStack::toString).collect(Collectors.joining("§f, §e"))) + "§f."));
             } else {
-                console.sendMessage("§a§l✔§r §9Инвентарь §8» §fУспешно добавлено §e" + clone + " §fв §e" + inventoryType + " §7" + targetUsername + "§f!");
+                console.sendMessage("§l§8[§a✔§8]§r §9Инвентарь §8» §fУспешно добавлено §e" + clone + " §fв §e" + inventoryType + " §7" + targetUsername + "§f!");
             }
         }
 
