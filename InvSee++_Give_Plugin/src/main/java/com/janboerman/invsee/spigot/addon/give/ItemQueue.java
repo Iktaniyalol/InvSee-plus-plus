@@ -57,11 +57,11 @@ public class ItemQueue implements ConfigurationSerializable {
             success = map.isEmpty();
             if (!success) {
                 last = map.get(0);
-				console.sendMessage(ChatColor.YELLOW + "[Queue] Could not add all of " + clone + " to " + targetUsername + "'s " + inventoryType + ".");
-				console.sendMessage(ChatColor.YELLOW + "[Queue] Remaining: " + last + (queue.isEmpty() ? "" : (" and " + 
-					queue.stream().map(ItemStack::toString).collect(Collectors.joining(", ")))) + ".");
+                console.sendMessage("§6§l❗§r §9Инвентарь §8» §fНе удалось добавить все предметы из §e" + clone + " §fв §e" + inventoryType + " §7" + targetUsername + "§f.");
+                console.sendMessage("§6§l❗§r §9Инвентарь §8» §fОсталось§8: §e" + last +
+                        (queue.isEmpty() ? "" : ("§f, §e" + queue.stream().map(ItemStack::toString).collect(Collectors.joining("§f, §e"))) + "§f."));
             } else {
-                console.sendMessage(ChatColor.GREEN + "[Queue] Added " + clone + " to " + targetUsername + "'s " + inventoryType + "!");
+                console.sendMessage("§8[§e✔§8]§r §9Инвентарь §8» §fУспешно добавлено §e" + clone + " §fв §e" + inventoryType + " §7" + targetUsername + "§f!");
             }
         }
 

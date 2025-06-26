@@ -16,26 +16,26 @@ public class Placeholders {
     }
 
     public static final String INACCESSIBLE = ChatColor.DARK_RED + "";
-    public static final String HELMET = ChatColor.AQUA + "Helmet";
-    public static final String CHESTPLATE = ChatColor.AQUA + "Chestplate";
-    public static final String LEGGINGS = ChatColor.AQUA + "Leggings";
-    public static final String BOOTS = ChatColor.AQUA + "Boots";
-    public static final String OFFHAND = ChatColor.AQUA + "Off-hand";
-    public static final String BODY = ChatColor.AQUA + "Body";
-    public static final String SADDLE = ChatColor.AQUA + "Saddle";
-    public static final String CURSOR = ChatColor.AQUA + "Cursor";
-    public static final String CRAFTING = ChatColor.AQUA + "Crafting ingredient";
-    public static final String ANVIL = ChatColor.AQUA + "Anvil input";
-    public static final String MERCHANT = ChatColor.AQUA + "Merchant payment";
-    public static final String CARTOGRAPHY = ChatColor.AQUA + "Cartography input";
-    public static final String ENCHANTING_ITEM = ChatColor.AQUA + "Enchanting item";
-    public static final String ENCHANTING_FUEL = ChatColor.AQUA + "Enchanting lapis lazuli";
-    public static final String GRINDSTONE = ChatColor.AQUA + "Grindstone input";
-    public static final String LOOM = ChatColor.AQUA + "Loom input";
-    public static final String SMITHING_BASE = ChatColor.AQUA + "Smithing item";
-    public static final String SMITHING_TEMPLATE = ChatColor.AQUA + "Smithing template";
-    public static final String SMITHING_ADDITION = ChatColor.AQUA + "Smithing addition";
-    public static final String STONECUTTER = ChatColor.AQUA + "Stonecutter input";
+    public static final String HELMET = ChatColor.AQUA + "Шлем";
+    public static final String CHESTPLATE = ChatColor.AQUA + "Нагрудник";
+    public static final String LEGGINGS = ChatColor.AQUA + "Поножи";
+    public static final String BOOTS = ChatColor.AQUA + "Ботинки";
+    public static final String OFFHAND = ChatColor.AQUA + "Вторая рука";
+    public static final String CURSOR = ChatColor.AQUA + "Курсор";
+	public static final String BODY = ChatColor.AQUA + "Тело";
+	public static final String SADDLE = ChatColor.AQUA + "Седло";
+	public static final String CRAFTING = ChatColor.AQUA + "Ингредиент верстака";
+    public static final String ANVIL = ChatColor.AQUA + "Слот наковальни";
+    public static final String MERCHANT = ChatColor.AQUA + "Оплата торговца";
+    public static final String CARTOGRAPHY = ChatColor.AQUA + "Слот стола картографии";
+    public static final String ENCHANTING_ITEM = ChatColor.AQUA + "Зачаровываемый предмет";
+    public static final String ENCHANTING_FUEL = ChatColor.AQUA + "Лазурит для зачарования";
+    public static final String GRINDSTONE = ChatColor.AQUA + "Слот точила";
+    public static final String LOOM = ChatColor.AQUA + "Слот ткацкого станка";
+    public static final String SMITHING_BASE = ChatColor.AQUA + "Ковка предмета";
+    public static final String SMITHING_TEMPLATE = ChatColor.AQUA + "Ковочный шаблон";
+    public static final String SMITHING_ADDITION = ChatColor.AQUA + "Дополнение для ковки";
+    public static final String STONECUTTER = ChatColor.AQUA + "Слот камнереза";
     public static final String GENERIC = ChatColor.AQUA + "";
 
     public static final Consumer<? super ItemMeta> HIDE_ATTRIBUTES = meta -> meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -58,10 +58,10 @@ public class Placeholders {
 
         List<String> lore = meta.getLore();
         if (lore == null || lore.isEmpty()) {
-            lore = Collections.singletonList("InvSee++ placeholder");
-        } else if (!"InvSee++ placeholder".equals(lore.get(lore.size() - 1))) {
+            lore = Collections.singletonList("§9Просмотр инвентаря");
+        } else if (!"§9Просмотр инвентаря".equals(lore.get(lore.size() - 1))) {
             lore.add("");
-            lore.add("InvSee++ placeholder");
+            lore.add("§9Просмотр инвентаря");
         }
         meta.setLore(lore);
 

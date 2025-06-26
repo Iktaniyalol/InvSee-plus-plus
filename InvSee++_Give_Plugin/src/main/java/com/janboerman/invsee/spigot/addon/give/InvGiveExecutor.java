@@ -55,7 +55,7 @@ class InvGiveExecutor implements CommandExecutor {
         CompletableFuture<Optional<String>> userNameFuture = futures.getSecond();
 
         Either<String, ItemStack> eitherStack = ArgParser.parseItem(giveApi, groupedArguments);
-        if (eitherStack.isLeft()) { sender.sendMessage(ChatColor.RED + eitherStack.getLeft()); return true; }
+        if (eitherStack.isLeft()) { sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §f" + eitherStack.getLeft()); return true; }
         assert eitherStack.isRight();
 
         final ItemStack finalItems = eitherStack.getRight();
@@ -66,7 +66,7 @@ class InvGiveExecutor implements CommandExecutor {
 
         uuidFuture.<Optional<String>, Void>thenCombineAsync(userNameFuture, (optUuid, optName) -> {
             if (!optName.isPresent() || !optUuid.isPresent()) {
-                sender.sendMessage(ChatColor.RED + "Unknown player: " + inputPlayer);
+                sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + inputPlayer + " §6не существует§f.");
             } else {
                 String userName = optName.get();
                 UUID uuid = optUuid.get();
@@ -83,9 +83,9 @@ class InvGiveExecutor implements CommandExecutor {
                             if (plugin.getServer().getPlayer(uuid) == null)
                                 //if the player is offline, save the inventory.
                                 invseeApi.saveInventory(inventory).whenComplete((v, e) -> {
-                                    if (e != null) plugin.getLogger().log(Level.SEVERE, "Could not save inventory", e);
+                                    if (e != null) plugin.getLogger().log(Level.SEVERE, "§8[§cx§8]§r §9Система §8» §fНе удалось сохранить инвентарь", e);
                                 });
-                            sender.sendMessage(ChatColor.GREEN + "Added " + originalItems + " to " + userName + "'s inventory!");
+                            sender.sendMessage("§8[§e✔§8]§r §9Инвентарь §8» §fДобавлено §6" + originalItems + " §fв инвентарь игрока §7" + userName + "§f.");
                         } else {
                             //no success. for all the un-merged items, find an item in the player's inventory, and just exceed the material's max stack size!
                             int remainder = map.get(0).getAmount();
@@ -93,35 +93,35 @@ class InvGiveExecutor implements CommandExecutor {
                             finalItems.setAmount(remainder);
 
                             if (plugin.queueRemainingItems()) {
-                                sender.sendMessage(ChatColor.YELLOW + "Could not add the following items to the player's inventory: " + finalItems + ", enqueuing..");
+                                sender.sendMessage("§8[§e⚡§8]§r §9Инвентарь §8» §fНе удалось добавить предметы в инвентарь§8: §e" + finalItems + "§f, добавлено в очередь...");
                                 queueManager.enqueueInventory(uuid, plugin.savePartialInventories() ? finalItems : originalItems);
                             } else {
-                                sender.sendMessage(ChatColor.RED + "Could not add the following items to the player's inventory: " + finalItems);
+                                sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось добавить предметы§8: §e" + finalItems + "§f.");
                             }
 
                             if (plugin.getServer().getPlayer(uuid) == null && plugin.savePartialInventories())
                                 invseeApi.saveInventory(inventory).whenComplete((v, e) -> {
-                                    if (e != null) plugin.getLogger().log(Level.SEVERE, "Could not save inventory", e);
+                                    if (e != null) plugin.getLogger().log(Level.SEVERE, "§8[§cx§8]§r §9Система §8» §fНе удалось сохранить инвентарь", e);
                                 });
                         }
                     } else {
                         NotCreatedReason reason = response.getReason();
                         if (reason instanceof TargetDoesNotExist) {
                             TargetDoesNotExist targetDoesNotExist = (TargetDoesNotExist) reason;
-                            sender.sendMessage(ChatColor.RED + "Player " + targetDoesNotExist.getTarget() + " does not exist.");
+                            sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрока §7" + targetDoesNotExist.getTarget() + " §6не существует§f.");
                         } else if (reason instanceof UnknownTarget) {
                             UnknownTarget unknownTarget = (UnknownTarget) reason;
-                            sender.sendMessage(ChatColor.RED + "Player " + unknownTarget.getTarget() + " has not logged onto the server yet.");
+                            sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + unknownTarget.getTarget() + " §fещё не §6заходил на сервер§f.");
                         } else if (reason instanceof TargetHasExemptPermission) {
                             TargetHasExemptPermission targetHasExemptPermission = (TargetHasExemptPermission) reason;
-                            sender.sendMessage(ChatColor.RED + "Player " + targetHasExemptPermission.getTarget() + " is exempted from being spectated.");
+                            sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fИгрок §7" + targetHasExemptPermission.getTarget() + " §fимеет §6защиту§f от просмотра инвентаря.");
                         } else if (reason instanceof ImplementationFault) {
                             ImplementationFault implementationFault = (ImplementationFault) reason;
-                            sender.sendMessage(ChatColor.RED + "An internal fault occurred when trying to load " + implementationFault.getTarget() + "'s inventory.");
+                            sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fОшибка при §6загрузке инвентаря§f игрока §7" + implementationFault.getTarget() + "§f.");
                         } else if (reason instanceof OfflineSupportDisabled) {
-                            sender.sendMessage(ChatColor.RED + "Spectating offline players' inventories is disabled.");
+                            sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fПросмотр инвентаря §6оффлайн-игроков §fотключён.");
                         } else {
-                            sender.sendMessage(ChatColor.RED + "Cannot give to " + inputPlayer + "'s inventory for an unknown reason.");
+                            sender.sendMessage("§8[§cx§8]§r §9Инвентарь §8» §fНе удалось добавить предмет в инвентарь §7" + inputPlayer + " §fпо неизвестной причине.");
                         }
                     }
                 }, runnable -> invseeApi.getScheduler().executeSyncPlayer(uuid, runnable, null));
