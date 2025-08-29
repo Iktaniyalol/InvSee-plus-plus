@@ -6,10 +6,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>invsee-plus-plus_per-world-inventory</artifactId>
-    <name>InvSee++ PerWorldInventory integration</name>
+    <artifactId>invsee-plus-plus_clone_plugin</artifactId>
+    <name>InvSee++ Clone Plugin</name>
 
     <build>
+        <finalName>InvSee++_Clone</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -33,25 +42,12 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.4-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>me.ebonjaeger</groupId>
-            <artifactId>perworldinventory-kt</artifactId>
-            <version>2.3.2</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../.libs/perworldinventory-kt-2.3.2.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.janboerman.invsee</groupId>
-            <artifactId>invsee-plus-plus_common</artifactId>
-            <version>${project.version}</version>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.janboerman.invsee</groupId>
-            <artifactId>utils</artifactId>
+            <artifactId>invsee-plus-plus_plugin</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
